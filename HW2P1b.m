@@ -13,7 +13,7 @@ omegaVec = [2 6 .7]';
 t0 = 0;
 dt = 0.001;
 
-ThetaDotVec = omegaDot2thetaDot( thetaVec0, omegaVec);
+ThetaDotVec = omega2thetaDot( thetaVec0, omegaVec);
 
 % Set up integral to find ThetaVec1
 tspan = [t0 t0+dt];
@@ -22,3 +22,4 @@ ThetaDot = @(t,y) ThetaDotVec;
 [t,ThetaVec] = ode45(ThetaDot, tspan, thetaVec0);
 
 ThetaVec1 = ThetaVec(end,:)'
+

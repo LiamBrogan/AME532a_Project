@@ -8,4 +8,6 @@ Quat = [cos(Roll/2)*cos(Pitch/2)*cos(Yaw/2)+sin(Roll/2)*sin(Pitch/2)*sin(Yaw/2)
         cos(Roll/2)*sin(Pitch/2)*cos(Yaw/2)+sin(Roll/2)*cos(Pitch/2)*sin(Yaw/2)
         cos(Roll/2)*cos(Pitch/2)*sin(Yaw/2)-sin(Roll/2)*sin(Pitch/2)*cos(Yaw/2)];
     
+Quat = Quat/norm(Quat);
+    
 end
