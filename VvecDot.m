@@ -4,7 +4,7 @@ function [Vdot_BE_BE] = VvecDot(Facc_BB,G_BB_BE,omega_BE,V_BB_BE)
 %   velocity vector in the body coordinates at time=t0, provide your new 
 %   velocity vector in the body coordinates at time=t0+dt.
 
-Vdot_BE_BE = Facc_BB+G_BB_BE-cross(omega_BE,V_BB_BE);
+Vdot_BE_BE = Facc_BB+G_BB_BE+cross(omega_BE,V_BB_BE);
 
 end
 

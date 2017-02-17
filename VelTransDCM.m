@@ -11,6 +11,6 @@ if isempty(omega)
 %     fprint('Default rotation rate set to [0;0;0]')
 end
 
-Vel_b = TransDCM(Vel_ab,DCM)-cross(omega,TransDCM(Pos_ab,DCM));
+Vel_b = TransDCM(Vel_ab,DCM)+cross(omega,TransDCM(Pos_ab,DCM));
 
 end

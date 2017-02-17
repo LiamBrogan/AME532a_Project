@@ -12,7 +12,7 @@ qo = p(1);
 qr = q(2:4);
 
 r = [0 0 0 0]';
-r(1) = (po*qo)-dot(po,qo);
+r(1) = (po*qo)-dot(pr,qr);
 r(2:4) = (po*qr)+(qo*pr)+cross(pr,qr);
 
 end

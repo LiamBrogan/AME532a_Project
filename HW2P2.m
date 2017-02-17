@@ -12,8 +12,8 @@ clc
 %% Given Conditions
 % Set up integration parameters
 t0 = 0; % Initial time
-dt = 1; % Time step
-tend = 1000; % End time for simulation
+dt = .1; % Time step
+tend = 10; % End time for simulation
 tcount = 1; % Loop counter
 timeVec = t0:dt:tend; % Period of integration
 

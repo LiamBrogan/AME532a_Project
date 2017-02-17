@@ -1,11 +1,5 @@
-function stateDiv = state_derivative(t,state) % ,omega_BE,C_EB,Facc_BB_BE,G_BB_BE)
+function stateDiv = state_derivative2(t,state,Flift_N,F_BB_BE,G_N,M_BB_BE,Jmat)
 %% Set up constant conditions
-% Constant conditions of aircraft
-F_BB_BE = [0; 0; 0];
-Flift_N = [0; 0; -9.807];
-G_N = [0; 0; 9.807];
-omega_BE = [0; 0.0000; 0.003];
-
 % Constant conditions of earth
 a = 6378137;
 b = 6356752;
@@ -17,7 +11,11 @@ N = a;
 % Take state information
 X_EE_BE = state(1:3);
 V_BB_BE = state(4:6);
-thetaVec_BN = state(7:9);
+quat_BE = state(7:10);
+omega_BE = state(11:13);
+
+% Current Euler Angles
+thetaVec_BN = Quat2Euler(quat_BE);
 
 % Set up loop counters
 dif = 1;
@@ -53,14 +51,16 @@ G_BB_BE = C_BN*G_N;
 Facc_BB_BE = F_BB_BE + C_BN*Flift_N;
 
 % Calculate derivatives of the state
-thetaDot = omega2thetaDot( thetaVec_BN, omega_BE);
-% quat_BE = quatDot(thetaVec,omegaVec);
-velDot_BB_BE = VvecDot(Facc_BB_BE,G_BB_BE,omega_BE,V_BB_BE);
+% thetaDot = omega2thetaDot( thetaVec_BN, omega_BE);
 xDot_EE_BE = VelTransDCM(C_EB,V_BB_BE,X_EE_BE,[]);
+velDot_BB_BE = VvecDot(Facc_BB_BE,G_BB_BE,omega_BE,V_BB_BE);
+quatDot_BE = quatDot(thetaVec_BN,omega_BE);
+omegaDot_BE = OmegaDot(t,M_BB_BE, Jmat, omega_BE);
 
 % Output of function
 stateDiv = [xDot_EE_BE;
             velDot_BB_BE;
-            thetaDot];
+            quatDot_BE;
+            omegaDot_BE];
 
 end
